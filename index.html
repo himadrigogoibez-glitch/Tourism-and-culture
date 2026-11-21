@@ -29,7 +29,7 @@
 <div class="state-list" id="stateList" aria-label="Filter by state"></div>
 <div class="section-head" style="align-items:center;margin:0 0 12px"><div class="results-meta" id="resultsMeta" aria-live="polite"></div><div class="budget-control"><label for="budgetRange" style="font-size:10px;font-weight:700;color:#58645b">DAILY BUDGET&nbsp; <strong id="budgetAmount">₹1,800</strong></label><input id="budgetRange" type="range" min="800" max="5000" step="100" value="2600" aria-label="Maximum illustrative daily budget" style="display:block;width:190px;accent-color:#315f4b;margin-top:6px"></div></div>
 <div class="cards" id="places"></div><div class="empty" id="emptyState"><strong>No exact match yet</strong>Try a higher daily budget, another state or a different travel style.</div>
-<div class="section-desc" style="margin-top:12px;font-size:9px">Example daily spend estimates are illustrative planning placeholders, not live prices or quotes. Confirm costs and access with local operators before travel.</div>
+<div class="section-desc" style="margin-top:12px;font-size:9px">This starter has one featured place per state. Photos and daily spend estimates are illustrative, not exact depictions or live quotes. Confirm costs, permits and access before travel.</div>
 </section>
 <section class="section" id="trip"><div class="trip-box"><div class="trip-copy"><div class="eyebrow" style="color:var(--green)">Your plan, your pace</div><h2>Build a North East trip.</h2><p>Add places from the discovery cards, choose a planning month and keep a simple route together. Your saved places and trip plan stay on this device.</p><div class="month-row"><label for="planMonth">PLANNING MONTH</label><input type="month" id="planMonth"></div><p style="font-size:9px;margin-top:9px">Month is saved with your plan; check official advisories and local conditions before booking.</p></div><div class="trip-panel"><div class="trip-head"><strong>My trip stops</strong><span id="tripMonthLabel" class="trip-month">Choose a month</span></div><div id="tripStops"></div><div class="trip-actions"><button class="clear-btn" id="clearTrip">Clear trip</button><button class="small-btn" id="saveTrip">Save plan</button></div></div></div></section>
 <section class="section" id="culture"><div class="culture"><div><div class="eyebrow">Travel with a little more meaning</div><h2>Culture lives in the details.</h2><p>From a shared meal to a handwoven pattern, the best journeys begin with listening. Look for community-led stays, local guides and craft experiences; ask before photographing people or sacred spaces, and follow local guidance at each place.</p><a class="text-link" style="color:var(--lime)" href="https://tourism.nagaland.gov.in/naga-heritage-village/" target="_blank" rel="noopener">Read about Kisama Heritage Village ↗</a></div><div class="culture-art"><span>Stories are better when shared.</span></div></div></section>
@@ -64,5 +64,6 @@ els.budget.value=stored.budget||'2600';if(savedMonth){els.month.value=savedMonth
 </script>
 </body>
 </html>
+
 
 
