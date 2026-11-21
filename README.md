@@ -1,24 +1,20 @@
 # Roam North East
 
-A responsive, static tourism discovery demo for North East India. Built for the Tourism & Culture prompt.
+A responsive static tourism discovery prototype for North East India, built for the Tourism & Culture hackathon prompt.
 
 ## Run locally
 
-Open `index.html` in a browser. It uses remote Unsplash images and Google Fonts, so those visual assets need an internet connection.
+Open `index.html` in a browser. Google Fonts and Unsplash photos are remote assets, so they need an internet connection.
 
-## Publish with GitHub Pages
+## Features
 
-1. Create a GitHub repository and upload `index.html` (or the contents of this folder).
-2. In the repository, open **Settings → Pages**.
-3. Choose **Deploy from a branch**, select `main` and `/ (root)`, then save.
-4. Open the Pages URL GitHub provides.
+- Browse a starter destination from each of the eight North East states
+- Filter destinations by state, travel style, and an illustrative per-day budget
+- Select a planning month and add/remove destinations to a route
+- Save favorite places and trip choices in this browser with local storage
+- Open official tourism information links from destination cards
 
-## Demo features
+## Content notes
 
-- Browse destinations and filter experiences by state and travel style
-- Set a sample daily budget
-- Explore a 3-day Meghalaya starter itinerary
-- Save/unsave experiences and the sample plan (in-page demo state)
-
-Destination budgets and experience details are illustrative demo content. Confirm current local conditions, access requirements and prices before travel.
+Daily spend amounts are example planning placeholders, not live prices or quotes. Confirm current costs, permits, access, weather, and local guidance with official sources and local operators before travel. The destination list is a small prototype, not a complete directory. Photos are illustrative and may not depict the named destination.
 
