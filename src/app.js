@@ -13,9 +13,11 @@ const elements = {
   filterForm: byId("filterForm"),
   stateSelect: byId("stateSelect"),
   vibeSelect: byId("vibeSelect"),
+  searchInput: byId("searchInput"),
   monthInput: byId("travelMonth"),
   planMonth: byId("planMonth"),
   transportMode: byId("transportMode"),
+  daysPerStopInput: byId("daysPerStop"),
   tripPreference: byId("tripPreference"),
   budgetInput: byId("budgetRange"),
   budgetValue: byId("budgetValue"),
@@ -53,6 +55,8 @@ const state = {
   tripStops: sharedTrip ? sharedTrip.stopIds : saved.tripStops,
   month: sharedTrip ? sharedTrip.month : saved.month,
   transportMode: sharedTrip ? sharedTrip.travelMode : saved.travelMode,
+  daysPerStop: sharedTrip ? sharedTrip.daysPerStop : saved.daysPerStop,
+  searchTerm: "",
   activeState: "all",
   activeVibe: "all",
   savedOnly: false
@@ -73,7 +77,8 @@ function persistState() {
       month: state.month,
       budget: state.budget,
       sort: state.sort,
-      travelMode: state.transportMode
+      travelMode: state.transportMode,
+      daysPerStop: state.daysPerStop
     }));
     return true;
   } catch {
@@ -121,7 +126,8 @@ function currentMatches() {
     maxBudget: state.budget,
     favorites: state.favorites,
     savedOnly: state.savedOnly,
-    sort: state.sort
+    sort: state.sort,
+    searchText: state.searchTerm
   });
 }
 
@@ -234,7 +240,7 @@ function renderTrip() {
   elements.tripPreference.textContent = "Transport preference: " + elements.transportMode.options[elements.transportMode.selectedIndex].text + ". Confirm local availability and fares.";
   elements.tripStops.replaceChildren();
 
-  const estimate = estimateTrip(state.tripStops, destinations, state.budget);
+  const estimate = estimateTrip(state.tripStops, destinations, state.budget, state.daysPerStop);
   if (estimate.stopCount === 0) {
     elements.tripStops.append(createNode("li", "trip-empty", "No stops yet. Add a destination from Explore to start a route."));
     elements.tripCost.hidden = true;
@@ -267,7 +273,7 @@ function renderTrip() {
   elements.tripCost.hidden = false;
   elements.tripCost.classList.toggle("over-budget", estimate.overBudgetStopIds.length > 0);
   elements.tripCostTotal.textContent = "≈ " + money(estimate.exampleTotal) + " example total";
-  elements.tripCostCaption.textContent = "One day per stop; excludes travel between places.";
+  elements.tripCostCaption.textContent = estimate.totalDays + " place-days · " + estimate.daysPerStop + " day(s) per stop; excludes travel between places.";
   elements.tripBudgetStatus.textContent = estimate.overBudgetStopIds.length
     ? estimate.overBudgetStopIds.length + " stop estimate" + (estimate.overBudgetStopIds.length === 1 ? " is" : "s are") + " above your " + money(state.budget) + "/day target"
     : "All stops fit your " + money(state.budget) + "/day target";
@@ -293,7 +299,7 @@ async function copyText(text) {
 
 async function shareTrip() {
   try {
-    const url = createShareUrl(window.location.href, state.tripStops, state.month, destinations, state.transportMode);
+    const url = createShareUrl(window.location.href, state.tripStops, state.month, destinations, state.transportMode, state.daysPerStop);
     elements.shareUrl.value = url;
     elements.sharePanel.hidden = false;
     const copied = await copyText(url);
@@ -314,6 +320,7 @@ function initialize() {
   elements.monthInput.value = state.month;
   elements.planMonth.value = state.month;
   elements.transportMode.value = state.transportMode;
+  elements.daysPerStopInput.value = String(state.daysPerStop);
   elements.sortSelect.value = state.sort;
 
   renderDestinations();
@@ -328,8 +335,20 @@ function initialize() {
     state.activeVibe = elements.vibeSelect.value;
     renderDestinations();
   });
+  elements.searchInput.addEventListener("input", () => {
+    state.searchTerm = elements.searchInput.value.trim();
+    renderDestinations();
+  });
   elements.monthInput.addEventListener("change", () => updateMonth(elements.monthInput.value));
   elements.planMonth.addEventListener("change", () => updateMonth(elements.planMonth.value));
+  elements.daysPerStopInput.addEventListener("change", () => {
+    const parsed = Number(elements.daysPerStopInput.value);
+    state.daysPerStop = Number.isInteger(parsed) ? Math.max(1, Math.min(14, parsed)) : 1;
+    elements.daysPerStopInput.value = String(state.daysPerStop);
+    persistState();
+    renderTrip();
+    announce("Trip duration preference saved.");
+  });
   elements.transportMode.addEventListener("change", () => {
     state.transportMode = elements.transportMode.value;
     persistState();
@@ -351,6 +370,7 @@ function initialize() {
     event.preventDefault();
     state.activeState = elements.stateSelect.value;
     state.activeVibe = elements.vibeSelect.value;
+    state.searchTerm = elements.searchInput.value.trim();
     updateMonth(elements.monthInput.value);
     renderDestinations();
     document.getElementById("explore").scrollIntoView({ behavior: "smooth", block: "start" });

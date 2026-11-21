@@ -43,10 +43,14 @@
       <section class="section discovery" id="explore" aria-labelledby="explore-title">
         <div class="section-heading">
           <div><p class="eyebrow eyebrow-dark">Your map is wide open</p><h2 id="explore-title">Eight states. Endless ways in.</h2></div>
-          <p class="section-intro">Find a place by state, travel style and example daily budget.</p>
+        <p class="section-intro">Search places, match a travel style, and compare example daily budgets.</p>
         </div>
 
         <form class="filter-panel" id="filterForm" aria-label="Destination filters">
+          <div class="filter-field">
+            <label for="searchInput">Search places</label>
+            <input id="searchInput" name="q" type="search" maxlength="80" placeholder="e.g. lake, culture, Kohima" autocomplete="off">
+          </div>
           <div class="filter-field">
             <label for="stateSelect">Where to?</label>
             <select id="stateSelect" name="state">
@@ -108,7 +112,7 @@
           <div class="trip-copy">
             <p class="eyebrow eyebrow-dark">Your plan, your pace</p>
             <h2 id="trip-title">Build a North East trip.</h2>
-            <p>Add destinations from the cards, choose a planning month, and keep a simple route together. Your preferences stay in this browser unless you choose to share the link.</p>
+            <p>Add destinations, choose a month and days per stop, and compare a simple example budget. Your preferences stay in this browser unless you choose to share the link.</p>
             <div class="trip-input-grid">
               <div class="month-control">
                 <label for="planMonth">Planning month</label>
@@ -121,6 +125,10 @@
                   <option value="shared">Shared or public transport</option>
                   <option value="local">Local driver or guide</option>
                 </select>
+              </div>
+              <div class="month-control">
+                <label for="daysPerStop">Days at each stop</label>
+                <input type="number" id="daysPerStop" min="1" max="14" step="1" value="1" inputmode="numeric">
               </div>
             </div>
             <p class="small-note">Your transport choice is a preference only; availability and fares vary by route. Check official advisories and local conditions before booking.</p>
