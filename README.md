@@ -4,17 +4,24 @@ A responsive static tourism discovery prototype for North East India, built for 
 
 ## Run locally
 
-Open `index.html` in a browser. Google Fonts and Unsplash photos are remote assets, so they need an internet connection.
+Open index.html in a modern browser. Remote Unsplash photos and Google Fonts enhance the page, but the application has no runtime libraries or API keys.
+
+## Test
+
+Requires Node.js 18 or newer. Run `node --test tests/*.test.js` from this folder. The built-in Node test runner checks destination coverage and source links, filtering, price sorting, saved-place filtering, trip estimates, share-link validation, stored-preference sanitization, safe rendering, and key accessibility markup.
 
 ## Features
 
 - Browse a starter destination from each of the eight North East states
-- Filter destinations by state, travel style, and an illustrative per-day budget
-- Select a planning month and add/remove destinations to a route
-- Save favorite places and trip choices in this browser with local storage
-- Open official tourism information links from destination cards
+- Combine state, travel-style, saved-place, and example-budget filters
+- Sort by illustrative price from low to high or high to low
+- Add or remove trip stops and see a one-day-per-stop example budget
+- Choose a trip month and transport preference, save preferences locally, and share a route link
+- Open official tourism information from destination cards
 
-## Content notes
+## Accessibility, privacy, and content
 
-Daily spend amounts are example planning placeholders, not live prices or quotes. Confirm current costs, permits, access, weather, and local guidance with official sources and local operators before travel. The destination list is a small prototype, not a complete directory. Photos are illustrative and may not depict the named destination.
+The app uses semantic landmarks, visible focus styles, keyboard-operable controls, status announcements, reduced-motion support, lazy-loaded images, safe text rendering, and validated share-link data. It stores only favorites, trip stops, month, budget, sort choice, and a travel preference in this browser; there is no account or server-side tracking in this prototype.
+
+Daily spend amounts are illustrative placeholders, not live prices or quotes. Confirm current costs, permits, access, weather, and local guidance with official sources and local operators before travel. The starter list is not a complete directory. Photos are illustrative and may not depict the named destination.
 
